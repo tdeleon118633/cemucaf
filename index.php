@@ -37,8 +37,6 @@ if( $boollogin  ) {
                                 $usuario = limpiar($_POST['usuario']);
                                 $password = limpiar($_POST['contra']);
                                 $password = md5($password);
-                                /*$strQuery = "SELECT * FROM usuarios 
-                                             WHERE (usu='".$usuario."' or ced='".$usuario."') and con='".$contra."'"; */
                                 $strQuery = "SELECT persona.persona,
                                                     usuario.bloqueado,
                                                     usuario.nombre,
