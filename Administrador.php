@@ -14,7 +14,7 @@ if($_SESSION['tipo_usu'] == 'admin'){
 else{
     $titulo='Usuario';
 }
-
+//$titulo='Centros Municipales de ';
 $usuario = limpiar($_SESSION['username']);
 $strQuery = "SELECT * FROM usuario WHERE usuario = '$usuario'";
         
@@ -124,7 +124,7 @@ body {
                   <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Hola! <?php echo $nomb; ?> <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="bd.php" target="admin"><i class="icon-refresh"></i> Iniciar BD</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="usuarios.php" target="admin"><i class="icon-user"></i> Crear Usuarios</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="adm_usuarios.php" target="admin"><i class="icon-user"></i> Crear Usuarios</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="cambiar_clave.php" target="admin"><i class="icon-refresh"></i> Cambiar Contraseña</a></li>
                     <li role="presentation" class="divider"></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="php_cerrar.php"><i class="icon-off"></i> Salir</a></li>

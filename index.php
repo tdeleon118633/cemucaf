@@ -1,4 +1,9 @@
 <?php
+/*
+    programmer: Tito De León
+    Tel:        5430-6466
+    Correo:     compuaserv@gmail.com, tito_de_leon@hotmail.com
+*/
 require_once("core/config.php");
 //require_once("template/config.php");
 $boollogin = true;
@@ -9,9 +14,10 @@ if( $boollogin  ) {
     <!DOCTYPE html>
      <html lang="esp">
           <head>
-            <meta http-equiv="content-type" content="text/html; charset=iso-8859-1;" />
+            <meta charset="ISO-8859-1">
             <title>CEMUCAF</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+            <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
             <meta name="description" content="">
             <meta name="author" content="">
             <link href="css/bootstrap.css" rel="stylesheet"> 
@@ -26,44 +32,47 @@ if( $boollogin  ) {
           <body>
             <div class="container">
                 <form name="form1" method="post" action="" class="form-signin">
-                    <h2 class="form-signin-heading">CEMUCAF</h2>
+                    <!--<h2 class="form-signin-heading">
+                        CEMUCAF
+                    </h2>-->
+                    <img src="images/cemucaf.jpeg" class="img-fluid" alt="Responsive image">
                     <input type="text" name="usuario" class="input-block-level" placeholder="Usuario" autocomplete="off">
-                    <input type="password" name="contra" class="input-block-level" placeholder="Contraseña" autocomplete="off">
+                    <input type="password" name="contra" class="input-block-level" placeholder="Contrase&ntilde;a" autocomplete="off">
                     <button class="btn btn-large btn-primary" type="submit">Iniciar</button>
                     <p>&nbsp;</p>
-                    <?php
-                            $act = "1";
-                            if(!empty($_POST['usuario']) and !empty($_POST['contra'])){
-                                $usuario = limpiar($_POST['usuario']);
-                                $password = limpiar($_POST['contra']);
-                                $password = md5($password);
-                                $strQuery = "SELECT persona.persona,
-                                                    usuario.bloqueado,
-                                                    usuario.nombre,
-                                                    usuario.usuario,
-                                                    usuario.password,
-                                                    usuario.tipo
-                                             FROM   persona
-                                                    INNER JOIN usuario
-                                                        ON usuario.persona = persona.persona
-                                             WHERE  usuario.usuario ='{$usuario}'  
-                                             AND    usuario.password = '{$password}'";
-                                $conn = mysql_query($strQuery);
-                                if(!$dato=mysql_fetch_array($conn)){
-                                    if( $act == "1"){
-                                        echo '<div class="alert alert-error" align="center"><strong>Usuario y Contraseña Incorrecta</strong></div>';
-                                    }else{
-                                        $act = "0";
-                                    }
+                        <?php
+                        $act = "1";
+                        if(!empty($_POST['usuario']) and !empty($_POST['contra'])){
+                            $usuario = limpiar($_POST['usuario']);
+                            $password = limpiar($_POST['contra']);
+                            $password = md5($password);
+                            $strQuery = "SELECT persona.persona,
+                                                usuario.bloqueado,
+                                                usuario.nombre,
+                                                usuario.usuario,
+                                                usuario.password,
+                                                usuario.tipo
+                                         FROM   persona
+                                                INNER JOIN usuario
+                                                    ON usuario.persona = persona.persona
+                                         WHERE  usuario.usuario ='{$usuario}'  
+                                         AND    usuario.password = '{$password}'";
+                            $conn = mysql_query($strQuery);
+                            if(!$dato=mysql_fetch_array($conn)){
+                                if( $act == "1"){
+                                    echo '<div class="alert alert-error" align="center"><strong>Usuario y Contrase&ntilde;a Incorrecta</strong></div>';
+                                }else{
+                                    $act = "0";
                                 }
-                                else{
-                                    if($dato['estado']=='n'){
-                                        echo '<div class="alert alert-error" align="center"><strong>Consulte con el Administrador</strong></div>';
-                                    }
-                                }
-                            }else{
-                                
                             }
+                            else{
+                                if($dato['estado']=='n'){
+                                    echo '<div class="alert alert-error" align="center"><strong>Consulte con el Administrador</strong></div>';
+                                }
+                            }
+                        }else{
+
+                        }
                         ?>
                 </form>
             </div> <!-- /container -->
