@@ -1,12 +1,29 @@
 <?php
 $conexion = mysql_connect("localhost","root","");
-mysql_select_db("cemucaf_db",$conexion);
+mysql_select_db("cemucaf",$conexion);
 date_default_timezone_set("America/Guatemala");
+//mysqli_query("SET NAMES 'utf8'");
 
 function limpiar($tags){
         $tags = strip_tags($tags);
         $tags = stripslashes($tags);
         $tags = mysql_real_escape_string($tags);
         return $tags;
+}
+
+function quitar_tildes($cadena) {
+    $no_permitidas= array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã?","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç","Ã¢","ê","Ã®","Ã´","Ã»","Ã?","Ã?","Ã?","Ã?","Ã?","ü","Ã¶","Ã?","Ã¯","Ã¤","«","Ò","Ã","Ã?","Ã?");
+    $permitidas= array ("a","e","i","o","u","A","E","I","O","U","n","N","A","E","I","O","U","a","e","i","o","u","c","C","a","e","i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
+    $texto = str_replace($no_permitidas, $permitidas ,$cadena);
+    return $texto;
+}
+
+function core_removeSpecialChars( $strString ){
+    $strReturn = "";
+    $strReturn = str_replace(array("/"," ","%",";"), "", $strString);
+    $strReturn = str_replace(array("á","é","í","ó","ú","ñ","à","è","ì","ò","ù","Á","É","Í","Ó","Ú","Ñ","À","È","Ì","Ò","Ù"),
+                           array("a","e","i","o","u","n","a","e","i","o","u","A","E","I","O","U","N","A","E","I","O","U"),
+                           $strReturn);
+    return $strReturn;
 }
 ?>

@@ -1,4 +1,9 @@
 <?php
+/*************************************************************
+    Developer: Tito De León
+    Tel:        5430-6466
+    Correo:     compuaserv@gmail.com, tito_de_leon@hotmail.com
+*************************************************************/
 session_start();
 include_once('php_conexion.php');   
 if(!empty($_POST['usuario']) and !empty($_POST['contra'])){
@@ -9,7 +14,7 @@ if(!empty($_POST['usuario']) and !empty($_POST['contra'])){
     
     $strQuery = "SELECT persona.persona,
                         usuario.bloqueado,
-                        usuario.nombre,
+                        usuario.nombre nombre_usuario,
                         usuario.usuario,
                         usuario.password,
                         usuario.tipo
@@ -22,7 +27,9 @@ if(!empty($_POST['usuario']) and !empty($_POST['contra'])){
     if($dato = mysql_fetch_array($can)){
      
         if($dato['bloqueado'] == 'N'){
-            $_SESSION['username'] = $dato['usuario'];
+            $_SESSION['persona'] = $dato['persona'];
+            $_SESSION['user'] = $dato['usuario'];
+            $_SESSION['username'] = $dato['nombre_usuario'];
             $_SESSION['tipo_usu'] = $dato['tipo'];
             $_SESSION['bloqueado'] = $dato['bloqueado'];
             if($_SESSION['tipo_usu'] == 'admin' or $_SESSION['tipo_usu'] == 'normal'){ 
